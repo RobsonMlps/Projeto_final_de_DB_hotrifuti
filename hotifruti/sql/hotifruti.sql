@@ -1,0 +1,87 @@
+
+
+CREATE TABLE CATEGORIA (
+    ID_Categoria SERIAL PRIMARY KEY,
+    Nome VARCHAR(100) NOT NULL,
+    Descricao TEXT
+);
+
+
+
+CREATE TABLE FORNECEDOR (
+    ID_Fornecedor SERIAL PRIMARY KEY,
+    Nome VARCHAR(100) NOT NULL,
+    CNPJ VARCHAR(18) UNIQUE NOT NULL,
+    Contato VARCHAR(100)
+);
+
+
+
+CREATE TABLE CLIENTE (
+    CPF VARCHAR(14) PRIMARY KEY,
+    Nome VARCHAR(100) NOT NULL
+);
+
+
+
+CREATE TABLE TELEFONE_CLIENTE (
+    ID_Telefone SERIAL PRIMARY KEY AUTO_INCREMENT,
+    ID_Cliente_CPF VARCHAR(14),
+    Numero_Telefone VARCHAR(20),
+    FOREIGN KEY (ID_Cliente_CPF) REFERENCES CLIENTE(CPF)
+);
+
+
+
+
+CREATE TABLE PRODUTO (
+    ID_Produto SERIAL PRIMARY KEY,
+    ID_Categoria INT,
+    Nome VARCHAR(100) NOT NULL,
+    Descricao TEXT,
+    Peso_KG DECIMAL,
+    FOREIGN KEY (ID_Categoria) REFERENCES CATEGORIA(ID_Categoria)
+);
+
+
+
+CREATE TABLE LOTE (
+    ID_Lote SERIAL PRIMARY KEY,
+    ID_Produto INT,
+    ID_Fornecedor INT,
+    Data_Entrada DATE,
+    Data_Validade DATE,
+    Custo DECIMAL,
+    FOREIGN KEY (ID_Produto) REFERENCES PRODUTO(ID_Produto),
+    FOREIGN KEY (ID_Fornecedor) REFERENCES FORNECEDOR(ID_Fornecedor)
+);
+
+
+
+CREATE TABLE VENDA (
+    ID_Venda SERIAL PRIMARY KEY,
+    ID_Cliente_CPF VARCHAR(14),
+    Data_Hora DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (ID_Cliente_CPF) REFERENCES CLIENTE(CPF)
+);
+
+
+
+
+CREATE TABLE ITEM_VENDA (
+    ID_Venda INT,
+    ID_Produto INT,
+    Quantidade_Vendida INT NOT NULL,
+    Preco_Unidade DECIMAL NOT NULL,
+
+    id_vendedor INT,
+    id_produto INT,
+
+    FOREIGN KEY (ID_Venda) REFERENCES VENDA(ID_Venda),
+    FOREIGN KEY (ID_Produto) REFERENCES PRODUTO(ID_Produto)
+);
+
+
+
+
+

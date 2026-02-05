@@ -1,0 +1,40 @@
+# Maven / build
+/target/
+*.war
+*.jar
+*.class
+
+# Compiled files
+*.class
+
+# IDEs
+/.idea/
+*.iml
+.project
+.classpath
+/.settings/
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs / temp
+logs/
+*.log
+tmp/
+temp/
+
+# Config / secrets
+.env
+.env.local
+config/
+*.properties
+*.keystore
+
+# Application specific
+target/app-web/
+
+# Database dumps (optional)
+# *.sql
