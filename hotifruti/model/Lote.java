@@ -14,11 +14,11 @@ public class Lote {
     private int idLote;
     private int idProduto;
     private int idFornecedor;
-    private String dataEntrada;
-    private String dataValidade;
-    private double custo;
+    private Date dataEntrada;
+    private Date dataValidade;
+    private BigDecimal custo;
 
-    public Lote(int idLote, int idProduto, int idFornecedor, String dataEntrada, String dataValidade, double custo) {
+    public Lote(int idLote, int idProduto, int idFornecedor, Date dataEntrada, Date dataValidade, BigDecimal custo) {
         this.idLote = idLote;
         this.idProduto = idProduto;
         this.idFornecedor = idFornecedor;
@@ -51,27 +51,27 @@ public class Lote {
         this.idFornecedor = idFornecedor;
     }
 
-    public String getDataEntrada() {
+    public Date getDataEntrada() {
         return dataEntrada;
     }
 
-    public void setDataEntrada(String dataEntrada) {
+    public void setDataEntrada(Date dataEntrada) {
         this.dataEntrada = dataEntrada;
     }
 
-    public String getDataValidade() {
+    public Date getDataValidade() {
         return dataValidade;
     }
 
-    public void setDataValidade(String dataValidade) {
+    public void setDataValidade(Date dataValidade) {
         this.dataValidade = dataValidade;
     }
 
-    public double getCusto() {
+    public BigDecimal getCusto() {
         return custo;
     }
 
-    public void setCusto(double custo) {
+    public void setCusto(BigDecimal custo) {
         this.custo = custo;
     }
 }
