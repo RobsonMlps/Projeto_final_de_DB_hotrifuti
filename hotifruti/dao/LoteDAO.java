@@ -52,7 +52,7 @@ public class LoteDAO {
 		}
 	}
 
-    public Categoria buscarPorId(int id) throws Exception {
+    public Lote buscarPorId(int id) throws Exception {
 		String sql = "SELECT * FROM LOTE WHERE ID_Lote = ?";
 		try (Connection conn = Conexao.getConnection();
 			PreparedStatement ps = conn.prepareStatement(sql)) {

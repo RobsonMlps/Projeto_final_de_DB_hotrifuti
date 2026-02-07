@@ -8,7 +8,9 @@ public class Venda {
     private LocalDateTime dataHora; // Mudado de DATETIME para LocalDateTime
 
     // Construtor Vazio (Boa prática)
-    public Venda() {}
+    public Venda() {
+        this.dataHora = LocalDateTime.now();
+    }
 
     // Construtor Cheio
     public Venda(int idVenda, String idClienteCpf, LocalDateTime dataHora) {
