@@ -7,14 +7,16 @@ package hotifruti.model;
     Peso_KG DECIMAL(10,2),
     FOREIGN KEY (ID_Categoria) REFERENCES CATEGORIA(ID_Categoria)
 ); */
+import java.math.BigDecimal;
+
 public class Produto {
     private int idProduto;
     private int idCategoria;
     private String nome;
     private String descricao;
-    private double pesoKg;
+    private BigDecimal pesoKg;
 
-    public Produto(int idProduto, int idCategoria, String nome, String descricao, double pesoKg) {
+    public Produto(int idProduto, int idCategoria, String nome, String descricao, BigDecimal pesoKg) {
         this.idProduto = idProduto;
         this.idCategoria = idCategoria;
         this.nome = nome;
@@ -54,11 +56,11 @@ public class Produto {
         this.descricao = descricao;
     }
 
-    public double getPesoKg() {
+    public BigDecimal getPesoKg() {
         return pesoKg;
     }
 
-    public void setPesoKg(double pesoKg) {
+    public void setPesoKg(BigDecimal pesoKg) {
         this.pesoKg = pesoKg;
     }
 }

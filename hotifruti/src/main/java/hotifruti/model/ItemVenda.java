@@ -8,13 +8,16 @@ package hotifruti.model;
     FOREIGN KEY (ID_Venda) REFERENCES VENDA(ID_Venda),
     FOREIGN KEY (ID_Produto) REFERENCES PRODUTO(ID_Produto)
 ); */
+
+import java.math.BigDecimal;
+
 public class ItemVenda {
     private int idVenda;
     private int idProduto;
     private int quantidadeVendida;
-    private double precoUnidade;
+    private BigDecimal precoUnidade;
 
-    public ItemVenda(int idVenda, int idProduto, int quantidadeVendida, double precoUnidade) {
+    public ItemVenda(int idVenda, int idProduto, int quantidadeVendida, BigDecimal precoUnidade) {
         this.idVenda = idVenda;
         this.idProduto = idProduto;
         this.quantidadeVendida = quantidadeVendida;
@@ -45,11 +48,11 @@ public class ItemVenda {
         this.quantidadeVendida = quantidadeVendida;
     }
 
-    public double getPrecoUnidade() {
+    public BigDecimal getPrecoUnidade() {
         return precoUnidade;
     }
 
-    public void setPrecoUnidade(double precoUnidade) {
+    public void setPrecoUnidade(BigDecimal precoUnidade) {
         this.precoUnidade = precoUnidade;
     }
 }
