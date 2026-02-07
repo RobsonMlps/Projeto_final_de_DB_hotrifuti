@@ -85,18 +85,20 @@ public class LoteDAO {
                     rs.getInt("ID_Lote"),
                     rs.getInt("ID_Produto"),
                     rs.getInt("ID_Fornecedor"),
-                    rs.getBigDecimal("Custo"),
                     rs.getDate("Data_Entrada"),
-                    rs.getDate("Data_Validade")));
+                    rs.getDate("Data_Validade"),
+					rs.getBigDecimal("Custo")));
+                
 			}
 		}
 		return lista;
 	}
 
     public List<LoteDTO> listaLote() throws Exception {
-        String sql = "SELECT l.ID_Lote, p.Nome AS Nome_Produto, f.Nome AS Nome_Fornecedor FROM LOTE l" + 
-        "INNER JOIN PRODUTO p ON l.ID_Produto = p.ID_Produto" +  
-        "INNER JOIN FORNECEDOR f ON l.ID_Fornecedor = f.ID_Fornecedor;";
+        String sql = "SELECT l.ID_Lote, p.Nome AS Nome_Produto, f.Nome AS Nome_Fornecedor, l.Custo, l.Data_Entrada, l.Data_Validade " +
+                     "FROM LOTE l " + // <--- Espaço aqui
+                     "INNER JOIN PRODUTO p ON l.ID_Produto = p.ID_Produto " + // <--- Espaço aqui
+                    "INNER JOIN FORNECEDOR f ON l.ID_Fornecedor = f.ID_Fornecedor";
 
         List<LoteDTO> listaLoteDTOs = new ArrayList<>();
 
@@ -113,6 +115,6 @@ public class LoteDAO {
                         rs.getDate("Data_Validade")));
                 }
             }
-            return listaLoteDTOs();
+            return listaLoteDTOs;
     }
 }

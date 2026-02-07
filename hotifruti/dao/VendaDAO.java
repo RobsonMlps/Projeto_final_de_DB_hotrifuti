@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.*;
 import hotifruti.model.Venda;
 import hotifruti.util.Conexao;
+import java.time.LocalDateTime;
 
 public class VendaDAO {
     
@@ -50,9 +51,9 @@ public class VendaDAO {
 				if (rs.next()) {
 					Venda venda = new Venda();
                     
-                    venda.setIdClienteCpf(rs.getIdClienteCpf("ID_Cliente_CPF"));
+                    venda.setIdClienteCpf(rs.getString("ID_Cliente_CPF"));
 			        venda.setDataHora(rs.getObject("Data_Hora", LocalDateTime.class));
-                    venda.setI(rs.getIdVenda("ID_Venda"));
+                    venda.setIdVenda(rs.getInt("ID_Venda"));
                     return venda;
 				}
 			}
