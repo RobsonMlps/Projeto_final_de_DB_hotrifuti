@@ -10,11 +10,11 @@ public class FornecedorDAO {
 
     public FornecedorDAO() {}
 
-   
+
     public void salvar(Fornecedor fornecedor) throws Exception {
         String sql = "INSERT INTO FORNECEDOR (Nome, CNPJ, Email) VALUES (?, ?, ?)";
         try (Connection conn = Conexao.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             
             ps.setString(1, fornecedor.getNome());
             ps.setString(2, fornecedor.getCnpj());
@@ -33,7 +33,7 @@ public class FornecedorDAO {
     public void atualizar(Fornecedor fornecedor) throws Exception {
         String sql = "UPDATE FORNECEDOR SET Nome = ?, CNPJ = ?, Email = ? WHERE ID_Fornecedor = ?";
         try (Connection conn = Conexao.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+            PreparedStatement ps = conn.prepareStatement(sql)) {
             
             ps.setString(1, fornecedor.getNome());
             ps.setString(2, fornecedor.getCnpj());
@@ -48,7 +48,7 @@ public class FornecedorDAO {
     public void excluir(int id) throws Exception {
         String sql = "DELETE FROM FORNECEDOR WHERE ID_Fornecedor = ?";
         try (Connection conn = Conexao.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+            PreparedStatement ps = conn.prepareStatement(sql)) {
             
             ps.setInt(1, id);
             ps.executeUpdate();
@@ -59,7 +59,7 @@ public class FornecedorDAO {
     public Fornecedor buscarPorId(int id) throws Exception {
         String sql = "SELECT * FROM FORNECEDOR WHERE ID_Fornecedor = ?";
         try (Connection conn = Conexao.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+            PreparedStatement ps = conn.prepareStatement(sql)) {
             
             ps.setInt(1, id);
             try (ResultSet rs = ps.executeQuery()) {
@@ -82,8 +82,8 @@ public class FornecedorDAO {
         List<Fornecedor> lista = new ArrayList<>();
         
         try (Connection conn = Conexao.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql);
-             ResultSet rs = ps.executeQuery()) {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery()) {
             
             while (rs.next()) {
                 Fornecedor f = new Fornecedor();

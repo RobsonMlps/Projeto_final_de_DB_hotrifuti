@@ -14,7 +14,7 @@ public class ClienteDAO {
         
         String sql = "INSERT INTO CLIENTE (Nome, CPF, Email, Telefone) VALUES (?, ?, ?, ?)";
         try (Connection conn = Conexao.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             
             ps.setString(1, cliente.getNome());
             ps.setString(2, cliente.getCpf());
@@ -33,7 +33,7 @@ public class ClienteDAO {
     public void atualizar(Cliente cliente) throws Exception {
         String sql = "UPDATE CLIENTE SET Nome = ?, CPF = ?, Email = ?, Telefone = ? WHERE ID_Cliente = ?";
         try (Connection conn = Conexao.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+            PreparedStatement ps = conn.prepareStatement(sql)) {
             
             ps.setString(1, cliente.getNome());
             ps.setString(2, cliente.getCpf());
@@ -48,7 +48,7 @@ public class ClienteDAO {
     public void excluir(int id) throws Exception {
         String sql = "DELETE FROM CLIENTE WHERE ID_Cliente = ?";
         try (Connection conn = Conexao.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+            PreparedStatement ps = conn.prepareStatement(sql)) {
             
             ps.setInt(1, id);
             ps.executeUpdate();
@@ -58,7 +58,7 @@ public class ClienteDAO {
     public Cliente buscarPorId(int id) throws Exception {
         String sql = "SELECT * FROM CLIENTE WHERE ID_Cliente = ?";
         try (Connection conn = Conexao.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+            PreparedStatement ps = conn.prepareStatement(sql)) {
             
             ps.setInt(1, id);
             try (ResultSet rs = ps.executeQuery()) {
@@ -81,8 +81,8 @@ public class ClienteDAO {
         List<Cliente> lista = new ArrayList<>();
         
         try (Connection conn = Conexao.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql);
-             ResultSet rs = ps.executeQuery()) {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery()) {
             
             while (rs.next()) {
                 Cliente c = new Cliente();
