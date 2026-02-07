@@ -53,18 +53,19 @@ public class ProdutoDAO {
     public Produto buscarPorId(int id) throws Exception {
         String sql = "SELECT * FROM PRODUTO WHERE ID_Produto = ?";
         try (Connection conn = Conexao.getConnection();
-            PreparedStatement ps = conn.prepareStatement(sql)) {
+             PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, id);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    Produto produto = new Produto();
-                    produto.setIdProduto(rs.getInt("ID_Produto"));
-                    produto.setNome(rs.getString("Nome"));
-                    produto.setDescricao(rs.getString("Descricao"));
-                    produto.setPesoKg(rs.getBigDecimal("Peso_KG"));
-                    produto.setIdCategoria(rs.getInt("ID_Categoria"));
-                    
-                    return produto;
+                    // Em vez de fazer "new Produto()" vazio e vários "set",
+                    // criamos o objeto direto com os dados do banco:
+                    return new Produto(
+                        rs.getInt("ID_Produto"),
+                        rs.getInt("ID_Categoria"),
+                        rs.getString("Nome"),
+                        rs.getString("Descricao"),
+                        rs.getBigDecimal("Peso_KG")
+                    );
                 }
             }
         }
