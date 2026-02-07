@@ -71,11 +71,4 @@ public class LoteDTO {
         this.dataValidade = dataValidade;
     }
 
-    public BigDecimal getCusto() {
-        return custo;
-    }
-
-    public void setCusto(BigDecimal custo) {
-        this.custo = custo;
-    }
 }
