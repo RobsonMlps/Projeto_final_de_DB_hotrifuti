@@ -1,4 +1,4 @@
-package hotifruti.servlet;
+package hotifruti.src.main.servlet;
 
 import java.io.IOException;
 import java.util.List;
