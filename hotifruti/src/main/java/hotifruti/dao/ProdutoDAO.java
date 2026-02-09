@@ -3,7 +3,7 @@ package hotifruti.dao;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.math.BigDecimal;
+
 import hotifruti.model.Produto;
 import hotifruti.util.Conexao;
 

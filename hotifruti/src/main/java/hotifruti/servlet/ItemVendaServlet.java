@@ -1,4 +1,4 @@
-package hotifruti.src.main.servlet;
+package hotifruti.servlet;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -66,7 +66,7 @@ public class ItemVendaServlet extends HttpServlet {
         List<ItemVenda> lista = dao.listar();
         
         req.setAttribute("listaItens", lista);
-        req.getRequestDispatcher("lista-itens.jsp").forward(req, resp);
+        req.getRequestDispatcher("lista-itemvenda.jsp").forward(req, resp);
     }
 
     private void abrirFormulario(HttpServletRequest req, HttpServletResponse resp) throws Exception {

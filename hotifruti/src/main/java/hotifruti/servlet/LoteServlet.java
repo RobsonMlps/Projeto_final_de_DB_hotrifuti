@@ -1,5 +1,4 @@
-package hotifruti.src.main.servlet;
-
+package hotifruti.servlet;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDate; // Para data de validade
@@ -65,7 +64,7 @@ public class LoteServlet extends HttpServlet {
         List<Lote> lista = dao.listar();
         
         req.setAttribute("listaLotes", lista);
-        req.getRequestDispatcher("lista-lotes.jsp").forward(req, resp);
+        req.getRequestDispatcher("lista-lote.jsp").forward(req, resp);
     }
 
     private void abrirFormulario(HttpServletRequest req, HttpServletResponse resp) throws Exception {
@@ -108,7 +107,7 @@ public class LoteServlet extends HttpServlet {
         String idProdStr = req.getParameter("idProduto");
         String idFornStr = req.getParameter("idFornecedor");
         String dataStr = req.getParameter("dataValidade"); // Vem yyyy-MM-dd do HTML
-        String qtdStr = req.getParameter("quantidade");
+        
         String custoStr = req.getParameter("custo");
 
         Lote lote = new Lote();
@@ -117,13 +116,12 @@ public class LoteServlet extends HttpServlet {
 
         // Converter Data (String -> LocalDate)
         if (dataStr != null && !dataStr.isEmpty()) {
-            lote.setDataValidade(LocalDate.parse(dataStr));
-        }
+            lote.setDataValidade(java.sql.Date.valueOf(req.getParameter("data_validade")));        }
 
         // Converter Inteiros (FKs e Quantidade)
         if (idProdStr != null) lote.setIdProduto(Integer.parseInt(idProdStr));
         if (idFornStr != null) lote.setIdFornecedor(Integer.parseInt(idFornStr));
-        if (qtdStr != null) lote.setQuantidade(Integer.parseInt(qtdStr));
+
 
         // Converter Dinheiro (String -> BigDecimal)
         if (custoStr != null && !custoStr.isEmpty()) {

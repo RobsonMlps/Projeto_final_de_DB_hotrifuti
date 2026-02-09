@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page isELIgnored="false" %>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -10,6 +12,10 @@
         .container { max-width: 800px; margin: auto; border: 1px solid #ddd; padding: 30px; border-radius: 15px; background-color: white; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
         h3 { color: #2e7d32; }
         .grid-botoes { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
+        
+        /* Deixa responsivo para celular */
+        @media (max-width: 600px) { .grid-botoes { grid-template-columns: 1fr; } }
+
         .estiloBotaoLink {
             display: block;
             padding: 15px;
@@ -18,10 +24,10 @@
             text-decoration: none;
             border-radius: 8px;
             font-weight: bold;
-            transition: background 0.3s;
+            transition: background 0.3s, transform 0.2s;
         }
-        .estiloBotaoLink:hover { background-color: #388e3c; transform: translateY(-2px); }
-        .secao-titulo { grid-column: span 2; margin-top: 20px; border-top: 1px solid #eee; padding-top: 10px; color: #666; font-size: 0.9em; }
+        .estiloBotaoLink:hover { background-color: #388e3c; transform: translateY(-3px); }
+        .secao-titulo { grid-column: span 2; margin-top: 20px; border-top: 1px solid #eee; padding-top: 10px; color: #666; font-size: 0.9em; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -32,8 +38,8 @@
         <p>Selecione o módulo que deseja gerenciar:</p>
 
         <div class="grid-botoes">
-            <a href="${pageContext.request.contextPath}/produto?acao=listar" class="estiloBotaoLink">📦 Gerenciar Produtos</a>
-            <a href="${pageContext.request.contextPath}/cliente?acao=listar" class="estiloBotaoLink">👥 Gerenciar Clientes</a>
+            <a href="produto?acao=listar" class="estiloBotaoLink">📦 Gerenciar Produtos</a>
+            <a href="cliente?acao=listar" class="estiloBotaoLink">👥 Gerenciar Clientes</a>
             <a href="categoria?acao=listar" class="estiloBotaoLink">📂 Gerenciar Categorias</a>
             <a href="fornecedor?acao=listar" class="estiloBotaoLink">🚚 Gerenciar Fornecedores</a>
 
@@ -46,7 +52,7 @@
         </div>
 
         <br />
-        <p style="color: #888; font-size: 0.8em;">Sistema conectado ao Banco de Dados MySQL</p>
+        <p style="color: #888; font-size: 0.8em;">Sistema conectado ao Banco de Dados Postgresql</p>
     </div>
 
 </body>

@@ -1,4 +1,4 @@
-package hotifruti.src.main.servlet;
+package hotifruti.servlet;
 
 import java.io.IOException;
 import java.util.List;
@@ -8,12 +8,13 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-import hotifruti.dao.ClienteDAO; // Importante para o combo box
-import hotifruti.model.Cliente;
+// Importante para o combo box
+import hotifruti.dao.FornecedorDAO;
+import hotifruti.model.Fornecedor;
 
 // Mapeamos para uma URL única "/produto"
-@WebServlet("/cliente")
-public class ClienteServlet extends HttpServlet {
+@WebServlet("/fornecedor")
+public class FornecedorServlet extends HttpServlet {
 
     // doGet: Gerencia a NAVEGAÇÃO (Links e Botões de ir)
     @Override
@@ -65,53 +66,55 @@ public class ClienteServlet extends HttpServlet {
     // --- MÉTODOS AJUDANTES (Para não bagunçar o switch) ---
 
     private void listar(HttpServletRequest req, HttpServletResponse resp) throws Exception {
-        ClienteDAO dao = new ClienteDAO();
-        List<Cliente> lista = dao.listar();
-        req.setAttribute("listaCliente", lista);
-        req.getRequestDispatcher("lista-clientes.jsp").forward(req, resp);
+        FornecedorDAO dao = new FornecedorDAO();
+        List<Fornecedor> lista = dao.listar();
+        req.setAttribute("listaFornecedor", lista);
+        req.getRequestDispatcher("lista-fornecedor.jsp").forward(req, resp);
     }
 
     private void abrirFormulario(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         // O formulário precisa das categorias para o <select>
-        req.getRequestDispatcher("form-cliente.jsp").forward(req, resp);
+        req.getRequestDispatcher("form-fornecedor.jsp").forward(req, resp);
     }
 
     private void carregarParaEdicao(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         int id = Integer.parseInt(req.getParameter("id"));
-        ClienteDAO dao = new ClienteDAO();
-        Cliente c = dao.buscarPorId(id);
+        FornecedorDAO dao = new FornecedorDAO();
+        Fornecedor f = dao.buscarPorId(id);
         
-        req.setAttribute("cliente", c);
-        req.getRequestDispatcher("form-cliente.jsp").forward(req, resp);
+        req.setAttribute("fornecedor", f);
+        req.getRequestDispatcher("form-fornecedor.jsp").forward(req, resp);
     }
 
     private void excluir(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         int id = Integer.parseInt(req.getParameter("id"));
-        ClienteDAO dao = new ClienteDAO();
+        FornecedorDAO dao = new FornecedorDAO();
         dao.excluir(id);
-        resp.sendRedirect("cliente?acao=listar");
+        resp.sendRedirect("fornecedor?acao=listar");
     }
 
     private void salvar(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         // 1. Recebe dados
         String nome = req.getParameter("nome");
-        String cpf = req.getParameter("cpf"); // <--- Adicionado o CPF
+        String cnpj = req.getParameter("cnpj");
+        String email = req.getParameter("email"); // <--- Adicionado o CPF
         String idStr = req.getParameter("id");
 
-        Cliente c = new Cliente();
-        c.setNome(nome);
-        c.setCpf(cpf); // <--- Preenchendo o CPF no objeto
-        ClienteDAO dao = new ClienteDAO();
+        Fornecedor f = new Fornecedor();
+        f.setNome(nome);
+        f.setCnpj(cnpj);
+        f.setEmail(email);
+        FornecedorDAO dao = new FornecedorDAO();
 
         // 2. Decide se é NOVO ou ATUALIZAÇÃO
         if (idStr == null || idStr.isEmpty()) {
-            dao.salvar(c);
+            dao.salvar(f);
         } else {
-            c.setIdCliente(Integer.parseInt(idStr));
-            dao.atualizar(c);
+            f.setIdFornecedor(Integer.parseInt(idStr));
+            dao.atualizar(f);
         }
 
         // 3. Volta pra lista
-        resp.sendRedirect("cliente?acao=listar");
+        resp.sendRedirect("fornecedor?acao=listar");
     }
 }

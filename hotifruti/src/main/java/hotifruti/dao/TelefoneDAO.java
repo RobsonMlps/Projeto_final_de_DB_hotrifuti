@@ -14,7 +14,7 @@ public class TelefoneDAO {
         String sql = "INSERT INTO TELEFONE_CLIENTE (ID_Cliente, Numero_Telefone) VALUES (?, ?)";
         try (Connection conn = Conexao.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            ps.setInt(1, telefone.getIdTelefone());
+            ps.setString(1, telefone.getIdCliente());
             ps.setString(2, telefone.getNumeroTelefone());
             ps.executeUpdate();
 
@@ -30,7 +30,7 @@ public class TelefoneDAO {
         String sql = "UPDATE TELEFONE_CLIENTE SET ID_Cliente = ?, Numero_Telefone = ? WHERE ID_Telefone = ?";
         try (Connection conn = Conexao.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setInt(1, telefone.getIdTelefone());
+            ps.setString(1, telefone.getIdCliente());
             ps.setString(2, telefone.getNumeroTelefone());
             ps.setInt(3, telefone.getIdTelefone());
             ps.executeUpdate();
@@ -55,7 +55,7 @@ public class TelefoneDAO {
                 if (rs.next()) {
                     Telefone t = new Telefone();
                     t.setIdTelefone(rs.getInt("ID_Telefone"));
-                    t.setIdClienteCpf(String.valueOf(rs.getInt("ID_Cliente")));
+                    t.setIdCliente(rs.getString("ID_Cliente"));
                     t.setNumeroTelefone(rs.getString("Numero_Telefone"));
                     return t;
                 }
@@ -73,7 +73,7 @@ public class TelefoneDAO {
             while (rs.next()) {
                 Telefone t = new Telefone();
                 t.setIdTelefone(rs.getInt("ID_Telefone"));
-                t.setIdClienteCpf(String.valueOf(rs.getInt("ID_Cliente")));
+                t.setIdCliente(rs.getString("ID_Cliente"));
                 t.setNumeroTelefone(rs.getString("Numero_Telefone"));
                 lista.add(t);
             }

@@ -24,6 +24,9 @@ public class Produto {
         this.pesoKg = pesoKg;
     }
 
+    public Produto() {
+}
+
     public int getIdProduto() {
         return idProduto;
     }

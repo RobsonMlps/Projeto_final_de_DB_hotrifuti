@@ -17,12 +17,17 @@ public class ItemVenda {
     private int quantidadeVendida;
     private BigDecimal precoUnidade;
 
+    public ItemVenda() {
+    }
+
     public ItemVenda(int idVenda, int idProduto, int quantidadeVendida, BigDecimal precoUnidade) {
         this.idVenda = idVenda;
         this.idProduto = idProduto;
         this.quantidadeVendida = quantidadeVendida;
         this.precoUnidade = precoUnidade;
     }
+
+
 
     public int getIdVenda() {
         return idVenda;

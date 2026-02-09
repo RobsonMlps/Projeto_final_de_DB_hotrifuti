@@ -1,9 +1,8 @@
-package hotifruti.src.main.servlet;
+package hotifruti.servlet;
 
 import java.io.IOException;
 import java.util.List;
-import java.time.LocalDateTime; 
-import java.time.format.DateTimeFormatter; // Útil para formatar datas
+import java.math.BigDecimal; // IMPORTANTE: Faltava esse import para o peso
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -11,13 +10,12 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-import hotifruti.dao.VendaDAO; // Apenas um import basta
+import hotifruti.dao.TelefoneDAO;
 import hotifruti.dao.ClienteDAO;
-import hotifruti.model.Venda;
-import hotifruti.model.Cliente;
+import hotifruti.model.Telefone;
 
-@WebServlet("/venda")
-public class VendaServlet extends HttpServlet {
+@WebServlet("/telefone")
+public class TelefoneServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) 
@@ -63,80 +61,73 @@ public class VendaServlet extends HttpServlet {
     // --- MÉTODOS ---
 
     private void listar(HttpServletRequest req, HttpServletResponse resp) throws Exception {
-        VendaDAO dao = new VendaDAO();
-        List<Venda> lista = dao.listar();
+        TelefoneDAO dao = new TelefoneDAO();
+        List<Telefone> lista = dao.listar();
         
-        // Use plural para listas
-        req.setAttribute("listaVendas", lista);
+        // CORREÇÃO: "listaProdutos" (Plural) é o padrão
+        req.setAttribute("listaTelefone", lista);
         
-        req.getRequestDispatcher("lista-vendas.jsp").forward(req, resp);
+        // CORREÇÃO: Verifique se o nome do seu arquivo é lista-produtos.jsp
+        req.getRequestDispatcher("lista-telefone.jsp").forward(req, resp);
     }
 
     private void abrirFormulario(HttpServletRequest req, HttpServletResponse resp) throws Exception {
-        // CORREÇÃO: Venda depende de Cliente, não de Categoria!
         ClienteDAO cliDao = new ClienteDAO();
+        // Carrega o combo box de categorias
+        req.setAttribute("listaCliente", cliDao.listar());
         
-        // Carrega a lista de clientes para o <select>
-        req.setAttribute("listaClientes", cliDao.listar());
-        
-        req.getRequestDispatcher("form-venda.jsp").forward(req, resp);
+        req.getRequestDispatcher("form-telefone.jsp").forward(req, resp);
     }
 
     private void carregarParaEdicao(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         int id = Integer.parseInt(req.getParameter("id"));
-        VendaDAO dao = new VendaDAO();
-        Venda v = dao.buscarPorId(id);
+        TelefoneDAO dao = new TelefoneDAO();
+        Telefone t = dao.buscarPorId(id);
         
-        req.setAttribute("venda", v);
+        req.setAttribute("telefone", t);
         
-        // Carrega a lista de clientes novamente para edição
+        // Carrega o combo box novamente para a edição
         ClienteDAO cliDao = new ClienteDAO();
-        req.setAttribute("listaClientes", cliDao.listar());
+        req.setAttribute("listacliente", cliDao.listar());
         
-        req.getRequestDispatcher("form-venda.jsp").forward(req, resp);
+        req.getRequestDispatcher("form-telefone.jsp").forward(req, resp);
     }
 
     private void excluir(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         int id = Integer.parseInt(req.getParameter("id"));
-        VendaDAO dao = new VendaDAO();
+        TelefoneDAO dao = new TelefoneDAO();
         dao.excluir(id);
-        resp.sendRedirect("venda?acao=listar");
+        resp.sendRedirect("telefone?acao=listar");
     }
 
     private void salvar(HttpServletRequest req, HttpServletResponse resp) throws Exception {
-        // 1. RECEBE OS DADOS COMO STRING
+        // 1. Recebe os dados como STRING (Texto)
         String idCliStr = req.getParameter("idCliente");
-        String dataHoraStr = req.getParameter("dataHora"); // Vem do input type="datetime-local"
-        String idStr = req.getParameter("id"); // CORREÇÃO: Faltava pegar o ID da venda
+        String numero = req.getParameter("numero"); // Simplifiquei o nome
+        String idStr = req.getParameter("id"); 
 
-        Venda v = new Venda();
+        Telefone t = new Telefone();
+        t.setIdCliente(idCliStr);
+        t.setNumeroTelefone(numero);
 
-        // 2. CONVERSÃO: CLIENTE (String -> Int)
+        // 2. CONVERSÕES (A parte crítica)
+        
+        // Converte Categoria (Texto -> Inteiro)
         if (idCliStr != null && !idCliStr.isEmpty()) {
-            int idCliente = Integer.parseInt(idCliStr);
-            v.setIdCliente(idCliente); // Só atribui DEPOIS de converter
+            t.setIdCliente(idCliStr);
         }
 
-        // 3. CONVERSÃO: DATA (String -> LocalDateTime)
-        // Se o HTML enviar "2023-10-20T14:30", o parse funciona direto.
-        if (dataHoraStr != null && !dataHoraStr.isEmpty()) {
-            v.setDataHora(LocalDateTime.parse(dataHoraStr));
-        } else {
-            // Se não vier data, usa a data de AGORA
-            v.setDataHora(LocalDateTime.now());
-        }
 
-        VendaDAO dao = new VendaDAO();
+        TelefoneDAO dao = new TelefoneDAO();
 
-        // 4. DECISÃO: SALVAR OU ATUALIZAR
+        // 3. Salvar ou Atualizar
         if (idStr == null || idStr.isEmpty()) {
-            dao.salvar(v);
+            dao.salvar(t);
         } else {
-            // CORREÇÃO: Trocado 'p' por 'v'
-            v.setIdVenda(Integer.parseInt(idStr));
-            dao.atualizar(v);
+            t.setIdTelefone(Integer.parseInt(idStr));
+            dao.atualizar(t);
         }
 
-        resp.sendRedirect("venda?acao=listar");
+        resp.sendRedirect("telefone?acao=listar");
     }
 }

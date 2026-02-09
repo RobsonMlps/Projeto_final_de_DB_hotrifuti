@@ -8,14 +8,15 @@ package hotifruti.model;
 ); */
 public class Telefone {
     private int idTelefone;
-    private String idClienteCpf;
+    private String idCliente;
     private String numeroTelefone;
 
     public Telefone() {}
 
-    public Telefone(int idTelefone, String idClienteCpf, String numeroTelefone){
+    public Telefone(int idTelefone, String idCliente, String numeroTelefone){
         this.idTelefone = idTelefone;
-        this.idClienteCpf = idClienteCpf;
+        this.idCliente = idCliente;
+
         this.numeroTelefone = numeroTelefone;
     }
 
@@ -26,11 +27,11 @@ public class Telefone {
         this.idTelefone = idTelefone;
     }
 
-    public String getIdClienteCpf(){
-        return idClienteCpf;
+    public String getIdCliente(){
+        return idCliente;
     }
-    public void setIdClienteCpf(String idClienteCpf){
-        this.idClienteCpf = idClienteCpf;
+    public void setIdCliente(String idCliente){
+        this.idCliente = idCliente;
     }
 
     public String getNumeroTelefone(){
