@@ -1,0 +1,43 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    text-align: center;
+    padding: 20px;
+}
+
+h3 {
+    color: #333;
+}
+
+.container {
+    background: white;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+/* O estilo do botão que o professor usou */
+.estiloBotaoLink {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 5px;
+    text-decoration: none;
+    background-color: #007bff; /* Azul */
+    color: white;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.estiloBotaoLink:hover {
+    background-color: #0056b3; /* Azul mais escuro ao passar o mouse */
+}
+
+.grupo-botoes {
+    border: 1px solid #eee;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
