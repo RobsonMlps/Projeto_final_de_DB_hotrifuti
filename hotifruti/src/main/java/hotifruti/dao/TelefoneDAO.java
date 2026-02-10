@@ -14,7 +14,7 @@ public class TelefoneDAO {
         String sql = "INSERT INTO TELEFONE_CLIENTE (ID_Cliente, Numero_Telefone) VALUES (?, ?)";
         try (Connection conn = Conexao.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            ps.setString(1, telefone.getIdCliente());
+            ps.setInt(1, telefone.getIdCliente());
             ps.setString(2, telefone.getNumeroTelefone());
             ps.executeUpdate();
 

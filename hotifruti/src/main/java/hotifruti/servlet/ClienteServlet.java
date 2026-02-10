@@ -8,10 +8,10 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-import hotifruti.dao.ClienteDAO; // Importante para o combo box
+import hotifruti.dao.ClienteDAO; 
 import hotifruti.model.Cliente;
 
-// Mapeamos para uma URL única "/produto"
+// Mapeamos para uma URL única "/cliente", respossavel por conecta o front com o back
 @WebServlet("/cliente")
 public class ClienteServlet extends HttpServlet {
 
@@ -20,7 +20,7 @@ public class ClienteServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) 
             throws ServletException, IOException {
         
-        // Pega o parâmetro "acao" da URL (ex: /produto?acao=editar&id=5)
+        // Pega o parâmetro "acao" da URL (ex: /cliente?acao=editar&id=5)
         String acao = req.getParameter("acao");
         
         // Se não tiver ação, o padrão é listar
@@ -50,7 +50,7 @@ public class ClienteServlet extends HttpServlet {
         }
     }
 
-    // doPost: Gerencia o SALVAR (O formulário envia para cá)
+    // doPost: Gerencia o SALVAR (
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) 
             throws ServletException, IOException {
@@ -62,7 +62,7 @@ public class ClienteServlet extends HttpServlet {
         }
     }
 
-    // --- MÉTODOS AJUDANTES (Para não bagunçar o switch) ---
+    
 
     private void listar(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         ClienteDAO dao = new ClienteDAO();

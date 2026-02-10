@@ -8,12 +8,12 @@ package hotifruti.model;
 ); */
 public class Telefone {
     private int idTelefone;
-    private String idCliente;
+    private int idCliente;
     private String numeroTelefone;
 
     public Telefone() {}
 
-    public Telefone(int idTelefone, String idCliente, String numeroTelefone){
+    public Telefone(int idTelefone, int idCliente, String numeroTelefone){
         this.idTelefone = idTelefone;
         this.idCliente = idCliente;
 
@@ -27,10 +27,10 @@ public class Telefone {
         this.idTelefone = idTelefone;
     }
 
-    public String getIdCliente(){
+    public int getIdCliente(){
         return idCliente;
     }
-    public void setIdCliente(String idCliente){
+    public void setIdCliente(int idCliente){
         this.idCliente = idCliente;
     }
 

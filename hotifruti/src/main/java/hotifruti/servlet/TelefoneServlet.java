@@ -112,7 +112,7 @@ public class TelefoneServlet extends HttpServlet {
 
         // 2. CONVERSÕES (A parte crítica)
         
-        // Converte Categoria (Texto -> Inteiro)
+        // 
         if (idCliStr != null && !idCliStr.isEmpty()) {
             t.setIdCliente(idCliStr);
         }
@@ -120,7 +120,7 @@ public class TelefoneServlet extends HttpServlet {
 
         TelefoneDAO dao = new TelefoneDAO();
 
-        // 3. Salvar ou Atualizar
+        // Salvar ou Atualizar
         if (idStr == null || idStr.isEmpty()) {
             dao.salvar(t);
         } else {
